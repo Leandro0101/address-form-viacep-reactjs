@@ -1,6 +1,10 @@
 .form-adress{
+    height: 520px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px;
+    background: #1d3557;
     width: 40%;
-    margin: 100px auto;
+    margin: 40px auto;
 }
 .form-group{
     display: flex;
@@ -14,10 +18,10 @@
     font-weight: bold;
 } 
 .form-control{
-    width: 50%;
+    width: 60%;
     margin: 7px 0;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     height: 30px;
     transition: all 0.5s;
     background: #f4f4f8;
@@ -37,6 +41,9 @@
     color: #fff;
     height: 30px;
     font-weight: bold;
+}
+.btn:hover {
+    cursor: pointer;
 }
 .btn:focus{
     outline-style: none;
