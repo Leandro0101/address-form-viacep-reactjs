@@ -7,6 +7,28 @@ const Address = () => {
         console.log(values);
     }
 
+    const onBlurCep = (ev, setFieldValue, resetForm) => {
+        const { value } = ev.target;
+
+        const cep = value?.replace(/[^0-9]/g, '');
+
+        if (cep?.length !== 8) {
+            resetForm({ values: "" });
+            return;
+        }
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`).
+            then((response) => response.json()).
+            then((data) => {
+                setFieldValue('log', data.logradouro);
+                setFieldValue('number', data.numero);
+                setFieldValue('district', data.bairro);
+                setFieldValue('city', data.localidade);
+                setFieldValue('state', data.uf);
+            }
+            );
+    }
+
 
     return (
         <div>
@@ -21,19 +43,15 @@ const Address = () => {
                     state: "",
                 }}
 
-                render={({ values }) => (
+                render={({ values, setFieldValue, resetForm }) => (
                     <Form className="form-adress">
                         <div className="form-group">
                             <label>CEP</label>
-                            <Field name="cep" type="text" className="form-control" value={values.cep} />
+                            <Field name="cep" type="text" className="form-control" onBlur={(ev) => onBlurCep(ev, setFieldValue, resetForm)} value={values.cep} />
                         </div>
                         <div className="form-group">
                             <label>Logradouro</label>
                             <Field name="log" type="text" className="form-control" value={values.log} />
-                        </div>
-                        <div className="form-group">
-                            <label>Número</label>
-                            <Field name="number" type="text" className="form-control" value={values.number} />
                         </div>
                         <div className="form-group">
                             <label>Bairro</label>
